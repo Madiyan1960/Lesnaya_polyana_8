@@ -30,7 +30,7 @@
   <script>
     const sheetId = "e/2PACX-1vTQMQsMwooFWwjAALBhhaTADCBDZadgBpaPrJFaqnIAA6-R7uDw9nYyoP2zYelAfs-Ly-j2BXFWxJQ-/pubhtml?gid=0&single=true";
     const sheetName = "Лист1";
-    const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTQMQsMwooFWwjAALBhhaTADCBDZadgBpaPrJFaqnIAA6-R7uDw9nYyoP2zYelAfs-Ly-j2BXFWxJQ-/pubhtml`;
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
     fetch(url)
       .then(res => res.text())
