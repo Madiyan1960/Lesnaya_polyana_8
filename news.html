@@ -5,37 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Новости</title>
   <style>
-  body {
-    font-family: Arial, sans-serif; /* Шрифт */
-    padding: 5px;                  /* Внутренние отступы по краям страницы */
-    margin: 0;                      /* Убираем внешние отступы */
-    background-color: #f0f0f0;      /* Светлый фон всей страницы */
-    color: #333;                    /* Цвет текста */
-    line-height: 1.6;               /* Межстрочный интервал для читаемости */
-  }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 5px;
+      margin: 0;
+      background-color: #f0f0f0;
+      color: #333;
+      line-height: 1.6;
+    }
     #news-box {
-  border: 1px solid #ccc;         /* рамка светло-серого цвета */
-  padding: 15px;                  /* внутренние отступы — от текста до рамки */
-  max-width: 1000px;               /* максимальная ширина блока — 1000 пикселей */
-  margin: auto;                   /* автоматическое выравнивание по центру */
-  background-color: #f9f9f9;      /* светло-серый фон */
-  border-radius: 8px;             /* скруглённые углы */
-  min-height: 150px;              /* минимальная высота блока */
-}
-   /* Центрируем шапку */
+      border: 1px solid #ccc;
+      padding: 15px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      min-height: 150px;
+    }
     h1 {
       text-align: center;
-      margin-top: 10px; /* Чтобы было отступление от верхней части страницы */
+      margin-top: 10px;
     }
-</style>
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+    .news-item {
+      margin-bottom: 25px;
+      border-bottom: 1px dashed #ccc;
+      padding-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
   <h1>Новости</h1>
- 
+
   <div id="news-box">Загрузка новостей...</div>
-<a href="index.html">← Вернуться на главную</a>
+
+  <p style="text-align: center;"><a href="index.html">← Вернуться на главную</a></p>
+
   <script>
-    const sheetId = "1XVEJ_tG_071vT5ARmQLjZimXeXLsgbsrMJNguCriSHc";
+    const sheetId = "1XVEJ_tG_071vT5ARmQLjZimXeXLsgbsrMJNguCriSHc"; // Замените на свой ID таблицы
     const sheetName = "Лист1";
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
@@ -45,13 +56,29 @@
         const json = JSON.parse(text.substr(47).slice(0, -2));
         const rows = json.table.rows;
         const newsBox = document.getElementById('news-box');
-        newsBox.innerHTML = ""; // очистка
+        newsBox.innerHTML = "";
 
         rows.forEach(row => {
-          const news = row.c.map(cell => cell?.v).join(" ");
+          const cells = row.c;
+          const date = cells[0]?.v || "";
+          const title = cells[1]?.v || "";
+          const imageUrl = cells[2]?.v || "";
+
+          const newsItem = document.createElement("div");
+          newsItem.className = "news-item";
+
           const p = document.createElement("p");
-          p.textContent = news;
-          newsBox.appendChild(p);
+          p.innerHTML = `<strong>${date}</strong> — ${title}`;
+          newsItem.appendChild(p);
+
+          if (imageUrl) {
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = title;
+            newsItem.appendChild(img);
+          }
+
+          newsBox.appendChild(newsItem);
         });
       })
       .catch(err => {
@@ -59,6 +86,5 @@
         console.error("Ошибка:", err);
       });
   </script>
-   
 </body>
 </html>
