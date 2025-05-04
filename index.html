@@ -29,18 +29,7 @@
         .then(() => console.log("Service Worker зарегистрирован"));
     }
 
-    let deferredPrompt;
     
-
-      const btn = document.createElement('button');
-      btn.textContent = 'Установить как приложение';
-      btn.style.fontSize = '1.2em';
-      btn.style.margin = '20px';
-      btn.onclick = () => {
-        deferredPrompt.prompt();
-      };
-      document.body.appendChild(btn);
-    });
   </script>
   
   
