@@ -24,16 +24,14 @@
   <h1>Добро пожаловать в Лесную поляну/8 г.Косшы!<br></h1>
    <!-- ВАЖНО: скрипт вставляем перед </body> -->
   <script>
+  
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log("Service Worker зарегистрирован"));
-    }
-
-    
-  </script>
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log("Service Worker зарегистрирован"));
+  }
+</script>
   
-  
-  <!-- Изображение слева -->
+    <!-- Изображение слева -->
  
 <img src="background.jpg" alt="Фото" style="width: 400px; height: auto;">
   <h3><a href="O nas.html">О нас</a><br></h3>
