@@ -26,27 +26,29 @@
       text-align: center;
       margin-top: 10px;
     }
-    img {
-      max-width: 100%;
-      border-radius: 6px;
-      margin-top: 8px;
-    }
     .news-item {
       margin-bottom: 25px;
       border-bottom: 1px dashed #ccc;
       padding-bottom: 10px;
     }
+    .news-date {
+      font-weight: bold;
+      color: #555;
+    }
+    .news-img {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
   <h1>Новости</h1>
-
   <div id="news-box">Загрузка новостей...</div>
-
-  <p style="text-align: center;"><a href="index.html">← Вернуться на главную</a></p>
+  <p><a href="index.html">← Вернуться на главную</a></p>
 
   <script>
-    const sheetId = "1XVEJ_tG_071vT5ARmQLjZimXeXLsgbsrMJNguCriSHc"; // Замените на свой ID таблицы
+    const sheetId = "1XVEJ_tG_071vT5ARmQLjZimXeXLsgbsrMJNguCriSHc";
     const sheetName = "Лист1";
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
@@ -60,25 +62,29 @@
 
         rows.forEach(row => {
           const cells = row.c;
-          const date = cells[0]?.v || "";
-          const title = cells[1]?.v || "";
-          const imageUrl = cells[2]?.v || "";
+          let dateText = "";
+          let contentText = cells[1]?.v || "";
+          let imageUrl = cells[2]?.v || "";
 
-          const newsItem = document.createElement("div");
-          newsItem.className = "news-item";
-
-          const p = document.createElement("p");
-          p.innerHTML = `<strong>${date}</strong> — ${title}`;
-          newsItem.appendChild(p);
-
-          if (imageUrl) {
-            const img = document.createElement("img");
-            img.src = imageUrl;
-            img.alt = title;
-            newsItem.appendChild(img);
+          const dateCell = cells[0]?.v;
+          if (typeof dateCell === 'string' && dateCell.startsWith('Date')) {
+            const match = dateCell.match(/Date\((\d+),(\d+),(\d+)\)/);
+            if (match) {
+              const d = new Date(match[1], match[2], match[3]);
+              dateText = d.toLocaleDateString("ru-RU");
+            }
+          } else {
+            dateText = dateCell || "";
           }
 
-          newsBox.appendChild(newsItem);
+          const div = document.createElement("div");
+          div.className = "news-item";
+          div.innerHTML = `
+            <div class="news-date">${dateText}</div>
+            <div>${contentText}</div>
+            ${imageUrl ? `<img src="${imageUrl}" class="news-img" alt="Новость">` : ""}
+          `;
+          newsBox.appendChild(div);
         });
       })
       .catch(err => {
