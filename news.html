@@ -33,7 +33,7 @@
   <h1>Новости</h1>
  
   <div id="news-box">Загрузка новостей...</div>
-<a href="index.html">← Вернуться на главную</a>
+
   <script>
     const sheetId = "1XVEJ_tG_071vT5ARmQLjZimXeXLsgbsrMJNguCriSHc";
     const sheetName = "Лист1";
@@ -46,7 +46,7 @@
         const rows = json.table.rows;
         const newsBox = document.getElementById('news-box');
         newsBox.innerHTML = ""; // очистка
-
+<a href="index.html">← Вернуться на главную</a>
         rows.forEach(row => {
           const news = row.c.map(cell => cell?.v).join(" ");
           const p = document.createElement("p");
