@@ -1,16 +1,9 @@
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log("Service Worker зарегистрирован"));
-  }
-</script>
-
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open("v1").then(cache => {
       return cache.addAll([
         "/index.html",
-        "/icon.png"
+        "/icon.png",
         "/background.jpg"
       ]);
     })
@@ -24,3 +17,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
