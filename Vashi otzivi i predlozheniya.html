@@ -29,7 +29,18 @@
       container.innerHTML = "";
 
       rows.forEach(row => {
-        const date = row.c[0]?.v || '';
+        const rawDate = row.c[0]?.v;
+let date = '';
+if (rawDate) {
+  const d = new Date(rawDate);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0'); // месяц +1
+  const yyyy = d.getFullYear();
+  const hh = String(d.getHours()).padStart(2, '0');
+  const min = String(d.getMinutes()).padStart(2, '0');
+  date = `${dd}.${mm}.${yyyy} ${hh}:${min}`;
+}
+
         const name = row.c[1]?.v || '';
         const feedback = row.c[2]?.v || '';
 
