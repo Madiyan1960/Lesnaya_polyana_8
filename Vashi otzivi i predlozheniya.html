@@ -31,15 +31,25 @@
       rows.forEach(row => {
         const rawDate = row.c[0]?.v;
 let date = '';
-if (rawDate) {
-  const d = new Date(rawDate);
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0'); // месяц +1
-  const yyyy = d.getFullYear();
-  const hh = String(d.getHours()).padStart(2, '0');
-  const min = String(d.getMinutes()).padStart(2, '0');
-  date = `${dd}.${mm}.${yyyy} ${hh}:${min}`;
+if (typeof rawDate === 'string' && rawDate.startsWith('Date(')) {
+  const parts = rawDate.match(/\d+/g); // извлекаем все числа
+  if (parts && parts.length >= 3) {
+    const d = new Date(
+      parseInt(parts[0]),        // год
+      parseInt(parts[1]),        // месяц
+      parseInt(parts[2]),        // день
+      parseInt(parts[3] || 0),   // часы
+      parseInt(parts[4] || 0)    // минуты
+    );
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const yyyy = d.getFullYear();
+    const hh = String(d.getHours()).padStart(2, '0');
+    const min = String(d.getMinutes()).padStart(2, '0');
+    date = `${dd}.${mm}.${yyyy} ${hh}:${min}`;
+  }
 }
+
 
         const name = row.c[1]?.v || '';
         const feedback = row.c[2]?.v || '';
