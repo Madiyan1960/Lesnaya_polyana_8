@@ -1,100 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Новости</title>
+  <meta charset="UTF-8" />
+  <title>Отзывы</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 5px;
-      margin: 0;
-      background-color: #f0f0f0;
-      color: #333;
-      line-height: 1.6;
-    }
-    #news-box {
-      border: 1px solid #ccc;
-      padding: 15px;
-      max-width: 1000px;
-      margin: auto;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      min-height: 150px;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .news-item {
-      margin-bottom: 25px;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 10px;
-    }
-    .news-date {
-      font-weight: bold;
-      color: #555;
-    }
-    .news-img {
-  display: block;
-  max-width: 50%;
-  height: auto;
-  margin: 10px auto 0;
-  border-radius: 5px;
-}
-
+    body { font-family: sans-serif; padding: 20px; }
+    .review { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; background: #f9f9f9; }
+    .review-date { font-size: 0.9em; color: #777; }
+    .review-name { font-weight: bold; margin-bottom: 5px; }
   </style>
 </head>
 <body>
-  <h1>Новости</h1>
-  <div id="news-box">Загрузка новостей...</div>
-  <p><a href="index.html">← Вернуться на главную</a></p>
 
-  <script>
-    const sheetId = "1QFhIqMDPoO6AZ7ePFzs4AHO5k6iKXA72-pJmUHcrCnk";
-    const sheetName = "Ответы на форму (1)";
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+<h2>Отзывы посетителей</h2>
+<div id="reviews">Загрузка отзывов...</div>
 
-    fetch(url)
-      .then(res => res.text())
-      .then(text => {
-        const json = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = json.table.rows;
-        const newsBox = document.getElementById('news-box');
-        newsBox.innerHTML = "";
+<script>
+  const sheetID = '1QFhIqMDPoO6AZ7ePFzs4AHO5k6iKXA72-pJmUHcrCnk'; // ← Вставьте сюда ID
+  const sheetName = 'Ответы на форму (1)'; // ← Укажите имя листа, если нужно
+  const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
-        rows.forEach(row => {
-          const cells = row.c;
-          let dateText = "";
-          let contentText = cells[1]?.v || "";
-          let imageUrl = cells[2]?.v || "";
+  fetch(url)
+    .then(res => res.text())
+    .then(data => {
+      const json = JSON.parse(data.substr(47).slice(0, -2));
+      const rows = json.table.rows;
+      const container = document.getElementById("reviews");
+      container.innerHTML = "";
 
-          const dateCell = cells[0]?.v;
-          if (typeof dateCell === 'string' && dateCell.startsWith('Date')) {
-            const match = dateCell.match(/Date\((\d+),(\d+),(\d+)\)/);
-            if (match) {
-              const d = new Date(match[1], match[2], match[3]);
-              dateText = d.toLocaleDateString("ru-RU");
-            }
-          } else {
-            dateText = dateCell || "";
-          }
+      rows.forEach(row => {
+        const date = row.c[0]?.v || '';
+        const name = row.c[1]?.v || '';
+        const feedback = row.c[2]?.v || '';
 
-          const div = document.createElement("div");
-          div.className = "news-item";
-          div.innerHTML = `
-            <div class="news-date">${dateText}</div>
-            <div>${contentText}</div>
-            ${imageUrl ? `<img src="${imageUrl}" class="news-img" alt="Новость">` : ""}
-          `;
-          newsBox.appendChild(div);
-        });
-      })
-      .catch(err => {
-        document.getElementById('news-box').textContent = "Ошибка загрузки новостей.";
-        console.error("Ошибка:", err);
+        const div = document.createElement("div");
+        div.className = "review";
+        div.innerHTML = `
+          <div class="review-date">${date}</div>
+          <div class="review-name">${name}</div>
+          <div class="review-text">${feedback}</div>
+        `;
+        container.appendChild(div);
       });
-  </script>
+    })
+    .catch(err => {
+      document.getElementById("reviews").textContent = "Ошибка загрузки отзывов.";
+      console.error(err);
+    });
+</script>
+
 </body>
 </html>
-
