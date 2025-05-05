@@ -6,7 +6,8 @@ self.addEventListener("install", event => {
         "/Galereya.html",
         "/icon-192.png",
         "/icon-512.png",
-        "/background.jpg"
+        "/background.jpg",
+        "/feedback.html"
       ]);
     })
   );
