@@ -7,67 +7,74 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2196f3">
   <style>
-    .button-links {
-  display: flex;
-  flex-direction: column; /* Кнопки вертикально */
-  align-items: center;     /* Центр по горизонтали */
-  margin-top: 1px;
-}
-
-.btn {
-  width: 90%;               /* Занимает 90% ширины контейнера */
-  max-width: 300px;         /* Но не больше 300px */
-  text-align: center;
-  margin: 10px 0;
-  padding: 12px 24px;
-  background-color: #2196f3;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  box-sizing: border-box;  /* Учитывает padding в ширине */
-  margin-bottom: 0px; /* вот здесь */
-}
-
-.btn:hover {
-  background-color: #1976d2;
-}
-    /* Центрируем шапку */
-    h1 {
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
       text-align: center;
-      margin-top: 10px; /* Чтобы было отступление от верхней части страницы */
     }
 
-    /* Центрируем ссылку */
-    h3 {
+    h2 {
+      margin-top: 20px;
+    }
+
+    /* Изображение адаптивное */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px auto;
+      border-radius: 10px;
+    }
+
+    .button-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .btn {
+      width: 90%;
+      max-width: 300px;
       text-align: center;
+      margin: 5px 0;
+      padding: 12px 24px;
+      background-color: #2196f3;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      box-sizing: border-box;
+    }
+
+    .btn:hover {
+      background-color: #1976d2;
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>Добро пожаловать в ЖМ "Лесная поляна" г.Косшы!</h2><br>
-   <!-- ВАЖНО: скрипт вставляем перед </body> -->
-  <script>
-  
-    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log("Service Worker зарегистрирован"));
-  }
-</script>
-  
-    <!-- Изображение слева -->
- 
-<img src="background.jpg" alt="Фото" style="width: 300px; height: auto;">
+  <h2>Добро пожаловать в ЖМ "Лесная поляна" г.Косшы!</h2>
+
+  <img src="background.jpg" alt="Фото">
+
   <div class="button-links">
-  <a href="O nas.html" class="btn">О нас</a>
-  <a href="news.html" class="btn">Новости</a>
-  <a href="Galereya.html" class="btn">Галерея</a>
-  <a href="feedback.html" class="btn">Написать отзыв</a>
-  <a href="Vashi otzivi i predlozheniya.html" class="btn">Отзывы посетителей</a>
-  <a href="Kontakti.html" class="btn">Контакты</a>
-</div>
+    <a href="O nas.html" class="btn">О нас</a>
+    <a href="news.html" class="btn">Новости</a>
+    <a href="Galereya.html" class="btn">Галерея</a>
+    <a href="feedback.html" class="btn">Написать отзыв</a>
+    <a href="Vashi otzivi i predlozheniya.html" class="btn">Отзывы посетителей</a>
+    <a href="Kontakti.html" class="btn">Контакты</a>
+  </div>
 
   <script>
     if ('serviceWorker' in navigator) {
