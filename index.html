@@ -9,13 +9,14 @@
   <style>
     .button-links {
   display: flex;
-  flex-direction: column; /* Располагаем кнопки вертикально */
-  align-items: center;     /* Центрируем по горизонтали */
-  margin-top: 10px;
+  flex-direction: column; /* Кнопки вертикально */
+  align-items: center;     /* Центр по горизонтали */
+  margin-top: 30px;
 }
 
 .btn {
-  width: 300px;              /* Фиксированная ширина для всех кнопок */
+  width: 90%;               /* Занимает 90% ширины контейнера */
+  max-width: 300px;         /* Но не больше 300px */
   text-align: center;
   margin: 10px 0;
   padding: 12px 24px;
@@ -26,11 +27,13 @@
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s;
+  box-sizing: border-box;  /* Учитывает padding в ширине */
 }
 
 .btn:hover {
   background-color: #1976d2;
 }
+
 
 
     /* Центрируем шапку */
