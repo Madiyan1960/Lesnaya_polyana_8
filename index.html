@@ -7,21 +7,7 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2196f3">
   <style>
-    .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #2196f3;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #1976d2;
-}
-
+    
     /* Центрируем шапку */
     h1 {
       text-align: center;
@@ -48,12 +34,15 @@
     <!-- Изображение слева -->
  
 <img src="background.jpg" alt="Фото" style="width: 400px; height: auto;">
-  <h3><a href="O nas.html">О нас</a><br></h3>
-  <h3><a href="news.html">Новости</a><br></h3>
-  <h3><a href="Galereya.html">Галерея</a><br></h3>
-   <h3><a href="feedback.html">Написать отзыв</a><br></h3>
-  <h3><a href="Vashi otzivi i predlozheniya.html">Отзывы посетителей</a><br></h3>
-    <h3><a href="Kontakti.html">Контакты</a><br></h3>
+  <div class="button-links">
+  <a href="O nas.html" class="btn">О нас</a>
+  <a href="news.html" class="btn">Новости</a>
+  <a href="Galereya.html" class="btn">Галерея</a>
+  <a href="feedback.html" class="btn">Написать отзыв</a>
+  <a href="Vashi otzivi i predlozheniya.html" class="btn">Отзывы посетителей</a>
+  <a href="Kontakti.html" class="btn">Контакты</a>
+</div>
+
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
