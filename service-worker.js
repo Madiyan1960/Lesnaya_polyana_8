@@ -7,7 +7,8 @@ self.addEventListener("install", event => {
         "/icon-192.png",
         "/icon-512.png",
         "/background.jpg",
-        "/feedback.html"
+        "/feedback.html",
+        "/contact.html"
       ]);
     })
   );
